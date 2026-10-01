@@ -1,6 +1,6 @@
 ---
 name: wd
-license: MIT
+license: Apache-2.0
 description: "Use for every non-CSA long task. Dynamic TTL check-ins."
 metadata:
   version: 1.0.0

@@ -1,11 +1,11 @@
 NOTICE
 
-This repository is licensed under the Apache License, Version 2.0,
-except for the components listed below.
+This repository is licensed under the Apache License, Version 2.0.
+See LICENSE.
 
 wd/
   Copyright (c) 2026 obj
-  Licensed under the MIT License. See wd/LICENSE.
+  Licensed under the Apache License, Version 2.0. See wd/LICENSE.
 
 dumbpipe/
   Operational guidance in this directory is original documentation and

@@ -4,10 +4,10 @@ Public copies of two agent skills.
 
 | Directory | License | What it is |
 |---|---|---|
-| [`wd/`](wd/) | MIT | Supervise long tasks with dynamic, evidence-bearing check-ins. |
+| [`wd/`](wd/) | Apache-2.0 | Supervise long tasks with dynamic, evidence-bearing check-ins. |
 | [`dumbpipe/`](dumbpipe/) | See notice below | Install, configure, and troubleshoot [dumbpipe](https://github.com/n0-computer/dumbpipe) encrypted forwarding. |
 
-The repository root is Apache License 2.0. `wd/` keeps its upstream MIT license; see [NOTICE](NOTICE).
+The repository, including `wd/`, is Apache License 2.0. Copyright (c) 2026 obj. See [NOTICE](NOTICE).
 
 ## Install
 
