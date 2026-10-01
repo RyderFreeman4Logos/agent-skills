@@ -1,0 +1,14 @@
+NOTICE
+
+This repository is licensed under the Apache License, Version 2.0,
+except for the components listed below.
+
+wd/
+  Copyright (c) 2026 obj
+  Licensed under the MIT License. See wd/LICENSE.
+
+dumbpipe/
+  Operational guidance in this directory is original documentation and
+  is covered by the Apache License 2.0 at the repository root.
+  The dumbpipe program itself is a separate upstream project:
+  https://github.com/n0-computer/dumbpipe
