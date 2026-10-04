@@ -62,7 +62,8 @@ fi
 
 ticket_tmp="$(mktemp "$profile_dir/.ticket.XXXXXX")"
 stderr_tmp="$(mktemp "$profile_dir/.stderr.XXXXXX")"
-cleanup() { rm -f -- "$ticket_tmp" "$stderr_tmp"; }
+identity_tmp="$(mktemp "$profile_dir/.identity.env.XXXXXX")"
+cleanup() { rm -f -- "$ticket_tmp" "$stderr_tmp" "$identity_tmp"; }
 trap cleanup EXIT
 
 if ! "$dumbpipe_bin" generate-ticket >"$ticket_tmp" 2>"$stderr_tmp"; then
@@ -85,7 +86,6 @@ if [[ -z "$ticket" ]]; then
   exit 6
 fi
 
-identity_tmp="$profile_dir/.identity.env.tmp"
 printf 'IROH_SECRET=%s\n' "$secret" >"$identity_tmp"
 chmod 600 "$identity_tmp" "$ticket_tmp"
 mv -f -- "$identity_tmp" "$profile_dir/identity.env"
