@@ -19,6 +19,10 @@ metadata:
 
 # WD
 
+## Metadata compatibility
+
+The `metadata.hermes.tags` list uses the [Hermes skill-discovery extension](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills); the remaining structured values are retained WD annotations. The strict [Agent Skills metadata specification](https://agentskills.io/specification#metadata-field) permits only string values, so strict-only consumers need a converted copy. Do not flatten this extension without preserving Hermes tag discoverability.
+
 ## When to Use
 
 Use before launching or resuming any native subagent or non-CSA command expected to exceed 90 seconds, and whenever a user requests a long-task status audit.
