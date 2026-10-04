@@ -42,7 +42,7 @@ See [full entry 9](65-fallacies-part-01.md).
 ## 10. 诉诸传统（Appeal to Tradition）
 See [full entry 10](65-fallacies-part-01.md).
 
-## 11. 掩耳盗铃（Appeal to Consequences of a Belief）
+## 11. 诉诸后果（Appeal to Consequences of a Belief）
 See [full entry 11](65-fallacies-part-01.md).
 
 ## 12. 诉诸恐惧（Appeal to Fear）

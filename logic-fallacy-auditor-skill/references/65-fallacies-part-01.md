@@ -98,7 +98,7 @@
 - **诊断问题:** 历史延续本身为何证明当前条件下仍然正确？
 - **防误报:** 传统可以携带经验信息，但仍需评估其形成条件和当前适用性。
 
-## 11. 掩耳盗铃（Appeal to Consequences of a Belief）
+## 11. 诉诸后果（Appeal to Consequences of a Belief）
 
 - **ID:** `appeal_to_consequences`
 - **分组:** `appeal`

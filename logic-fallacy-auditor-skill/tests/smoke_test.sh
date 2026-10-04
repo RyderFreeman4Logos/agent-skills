@@ -18,4 +18,6 @@ grep -q '轶事证据' "$TMP/report.md"
 grep -q '人身攻击' "$TMP/report.md"
 grep -q '诉诸自然' "$TMP/report.md"
 
+python3 "$ROOT/../tests/phase3_regression_test.py"
+
 echo "smoke test OK"

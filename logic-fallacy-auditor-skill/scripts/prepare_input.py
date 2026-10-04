@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Normalize text and emit stable line-numbered JSON for fallacy analysis."""
+"""Normalize line endings and emit stable line-numbered JSON for fallacy analysis."""
 
 from __future__ import annotations
 import argparse
 import hashlib
 import json
 import sys
-import unicodedata
 from pathlib import Path
 
 
@@ -18,7 +17,6 @@ def read_text(path: str | None) -> str:
 
 def normalize(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    text = unicodedata.normalize("NFC", text)
     # Preserve paragraph/line structure, trim trailing whitespace only.
     return "\n".join(line.rstrip() for line in text.split("\n")).strip("\n")
 

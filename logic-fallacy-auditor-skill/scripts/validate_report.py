@@ -23,6 +23,17 @@ REQUIRED_FINDING_FIELDS = {
     "fact_check_needed",
     "repair",
 }
+REQUIRED_REPORT_FIELDS = {"analysis_version", "summary", "findings", "fallacy_fallacy_caveat"}
+FINDING_STRING_FIELDS = REQUIRED_FINDING_FIELDS - {"confidence", "centrality", "fact_check_needed"}
+
+
+def check_string_list(value, label: str, errors: list[str]) -> None:
+    if not isinstance(value, list):
+        errors.append(f"{label} must be an array")
+    else:
+        for i, item in enumerate(value, 1):
+            if not isinstance(item, str):
+                errors.append(f"{label} item {i} must be a string")
 
 
 def load_json(path: Path):
@@ -44,6 +55,32 @@ def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
 
+    if not isinstance(report, dict):
+        errors.append("top-level report must be an object")
+        report = {}
+    missing_report = REQUIRED_REPORT_FIELDS - set(report)
+    if missing_report:
+        errors.append(f"top-level: missing fields {sorted(missing_report)}")
+    if not isinstance(report.get("analysis_version"), str):
+        errors.append("analysis_version must be a string")
+
+    summary = report.get("summary")
+    if not isinstance(summary, dict):
+        errors.append("summary must be an object")
+        summary = {}
+    missing_summary = {"overall", "most_important"} - set(summary)
+    if missing_summary:
+        errors.append(f"summary: missing fields {sorted(missing_summary)}")
+    for field in ("overall", "most_important"):
+        if not isinstance(summary.get(field), str):
+            errors.append(f"summary.{field} must be a string")
+
+    if not isinstance(report.get("fallacy_fallacy_caveat"), str):
+        errors.append("fallacy_fallacy_caveat must be a string")
+    for field in ("important_non_findings", "fact_checks_needed"):
+        if field in report:
+            check_string_list(report[field], field, errors)
+
     findings = report.get("findings")
     if not isinstance(findings, list):
         errors.append("top-level 'findings' must be a list")
@@ -58,8 +95,14 @@ def main() -> int:
         if missing:
             errors.append(f"finding {i}: missing fields {sorted(missing)}")
 
+        for field in FINDING_STRING_FIELDS:
+            if not isinstance(f.get(field), str):
+                errors.append(f"finding {i}: {field} must be a string")
+
         fid = f.get("fallacy_id")
-        if fid != "unclassified_reasoning_issue" and fid not in by_id:
+        if not isinstance(fid, str):
+            errors.append(f"finding {i}: fallacy_id must be a string")
+        elif fid != "unclassified_reasoning_issue" and fid not in by_id:
             errors.append(f"finding {i}: unknown fallacy_id {fid!r}")
         elif fid in by_id:
             expected = by_id[fid]
@@ -78,16 +121,21 @@ def main() -> int:
         if not isinstance(c, (int, float)) or isinstance(c, bool) or not (0 <= c <= 1):
             errors.append(f"finding {i}: confidence must be a number in [0, 1]")
 
-        if f.get("centrality") not in {"central", "supporting", "rhetorical"}:
+        centrality = f.get("centrality")
+        if not isinstance(centrality, str) or centrality not in {"central", "supporting", "rhetorical"}:
             errors.append(f"finding {i}: centrality must be central/supporting/rhetorical")
 
         if not isinstance(f.get("fact_check_needed"), bool):
             errors.append(f"finding {i}: fact_check_needed must be boolean")
 
-        key = (fid, q)
-        if key in seen:
-            warnings.append(f"finding {i}: duplicate fallacy/evidence pair")
-        seen.add(key)
+        if "related_fallacies" in f:
+            check_string_list(f["related_fallacies"], f"finding {i}: related_fallacies", errors)
+
+        if isinstance(fid, str) and isinstance(q, str):
+            key = (fid, q)
+            if key in seen:
+                warnings.append(f"finding {i}: duplicate fallacy/evidence pair")
+            seen.add(key)
 
     out = {"ok": not errors, "errors": errors, "warnings": warnings, "finding_count": len(findings)}
     json.dump(out, sys.stdout, ensure_ascii=False, indent=2)

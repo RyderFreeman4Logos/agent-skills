@@ -26,9 +26,10 @@ def main() -> int:
     print()
 
     for i, f in enumerate(findings, 1):
-        print(f"## {i}. {esc(f.get('name_zh'))}（{esc(f.get('name_en'))}） — {float(f.get('confidence', 0)):.2f}")
+        print(f"## {i}. `{esc(f.get('fallacy_id', ''))}` — {esc(f.get('name_zh'))}（{esc(f.get('name_en'))}） — {float(f.get('confidence', 0)):.2f}")
         print()
-        print(f"> {f.get('evidence_quote', '').strip()}")
+        quote = f.get("evidence_quote", "").strip()
+        print("\n".join(f"> {line}" for line in quote.splitlines()))
         print()
         print(f"**目标/结论：** {esc(f.get('conclusion_or_target', ''))}\n")
         print(f"**论证动作：** {esc(f.get('argumentative_move', ''))}\n")
