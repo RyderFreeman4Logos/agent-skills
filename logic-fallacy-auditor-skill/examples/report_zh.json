@@ -1,0 +1,60 @@
+{
+  "analysis_version": "1.0.0",
+  "summary": {
+    "overall": "文本包含三个高置信度推理问题：用单一个案否定总体风险、用人身评价替代对风险论据的回应、以及把‘天然’直接当作安全性的证明。",
+    "most_important": "轶事证据直接支撑了‘吸烟不会缩短寿命’这一核心结论，因此对论证影响最大。"
+  },
+  "findings": [
+    {
+      "fallacy_id": "anecdotal_evidence",
+      "name_zh": "轶事证据",
+      "name_en": "Anecdotal Evidence",
+      "evidence_quote": "我爷爷每天抽两包烟，活到92岁。所以吸烟不会缩短寿命。",
+      "conclusion_or_target": "吸烟不会缩短寿命。",
+      "argumentative_move": "用一个长寿吸烟者的个案推翻关于吸烟与寿命的总体性风险判断。",
+      "why_fallacious": "单一个案只能证明存在某个长寿吸烟者，不能代表吸烟者总体，也不能抵消群体层面的风险差异。",
+      "strongest_non_fallacious_interpretation": "说话者也许只想指出吸烟并非让每个个体都早逝。",
+      "adjudication": "若结论收窄为‘吸烟不会保证每个人都早逝’，个案可以支持它；但原文结论是总体性的，因此仍构成轶事证据。",
+      "confidence": 0.98,
+      "centrality": "central",
+      "fact_check_needed": false,
+      "related_fallacies": ["hasty_generalization"],
+      "repair": "改为比较吸烟者与不吸烟者的代表性群体数据，并把结论表述为风险或期望寿命的差异。"
+    },
+    {
+      "fallacy_id": "ad_hominem",
+      "name_zh": "人身攻击",
+      "name_en": "Ad Hominem",
+      "evidence_quote": "你说吸烟有风险？你只是个没混出名堂的人，你的话当然不可信。",
+      "conclusion_or_target": "对方关于吸烟风险的主张不可信。",
+      "argumentative_move": "以对方个人成就或身份评价来否定其关于吸烟风险的主张。",
+      "why_fallacious": "个人是否‘混出名堂’与吸烟风险这一事实命题没有建立相关证据联系。",
+      "strongest_non_fallacious_interpretation": "若对方的专业资质本来就是证言可靠性的唯一来源，资质可能相关。",
+      "adjudication": "原文攻击的是泛化的个人地位而非相关专业资质，因此该解释不能挽救推理。",
+      "confidence": 0.97,
+      "centrality": "supporting",
+      "fact_check_needed": false,
+      "related_fallacies": [],
+      "repair": "直接回应对方使用的研究、数据或因果论证；如果质疑其专业性，应说明具体资质与该命题之间的关系。"
+    },
+    {
+      "fallacy_id": "appeal_to_nature",
+      "name_zh": "诉诸自然",
+      "name_en": "Appeal to Nature",
+      "evidence_quote": "再说，天然的东西当然更安全。",
+      "conclusion_or_target": "天然来源可以证明某物更安全。",
+      "argumentative_move": "把‘天然’这一属性直接用作安全性的证据。",
+      "why_fallacious": "自然来源本身并不能推出低毒性、低风险或适合特定剂量和用途。",
+      "strongest_non_fallacious_interpretation": "说话者可能暗示某类具体天然材料具有已知的安全记录。",
+      "adjudication": "原文没有提供这种具体机制或历史证据，而是用‘天然’本身完成推论，因此仍属诉诸自然。",
+      "confidence": 0.96,
+      "centrality": "supporting",
+      "fact_check_needed": false,
+      "related_fallacies": [],
+      "repair": "把‘天然’替换为可检验的安全指标，例如毒理数据、剂量、暴露途径和长期研究。"
+    }
+  ],
+  "important_non_findings": [],
+  "fact_checks_needed": [],
+  "fallacy_fallacy_caveat": "这些问题说明原文给出的理由不足以建立相应结论；它们本身不证明相反结论必然为真。"
+}

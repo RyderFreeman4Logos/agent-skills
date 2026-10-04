@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "concept_count": 65,
+  "scope": "De-duplicated 65-concept working taxonomy for logic/rhetoric analysis.",
+  "parts": [
+    "fallacies-part-01.json",
+    "fallacies-part-02.json",
+    "fallacies-part-03.json",
+    "fallacies-part-04.json"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "logic-fallacy-auditor",
+  "version": "1.0.0",
+  "language": ["zh-CN", "en"],
+  "taxonomy_concepts": 65,
+  "entrypoint": "SKILL.md",
+  "structured_output_schema": "schemas/report.schema.json",
+  "runtime": "python>=3.10, stdlib-only",
+  "network_required": false
+}
