@@ -19,7 +19,7 @@ LLM task:
 
 ### Stage C — Candidate detection
 LLM task:
-- compare each argument unit with `references/fallacies.json`;
+- compare each argument unit with the complete taxonomy assembled by `scripts/load_taxonomy.py` from `references/fallacies.json` and its declared parts;
 - propose zero or more candidates;
 - include counter-interpretation and confidence.
 

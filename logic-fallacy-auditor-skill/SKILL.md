@@ -26,8 +26,8 @@ A false conclusion is not automatically a fallacy. A fallacious argument does no
 Before doing a careful analysis, consult:
 
 - `references/methodology.md` — decision procedure and false-positive controls.
-- `references/fallacies.json` — machine-readable 65-concept bilingual taxonomy.
-- `references/65-fallacies.md` — human-readable taxonomy.
+- `references/fallacies.json` — manifest for `fallacies-part-01.json` through `fallacies-part-04.json`; run `python3 scripts/load_taxonomy.py` to reconstruct the complete machine-readable taxonomy.
+- `references/65-fallacies.md` — index linking the ordered human-readable taxonomy parts; read all parts for a complete taxonomy-wide analysis.
 - `references/sources.md` — provenance and external references.
 
 For long inputs, also use `scripts/prepare_input.py` to normalize and line-number the text.
@@ -68,7 +68,7 @@ Examples:
 
 ### 4. Match against the taxonomy
 
-Prefer the narrowest applicable entry in `references/fallacies.json`.
+Prefer the narrowest applicable entry in the complete machine-readable taxonomy assembled by `python3 scripts/load_taxonomy.py`, or use the matching entry in `references/65-fallacies.md` and its linked part.
 
 If multiple labels describe the same defect, choose one primary label and put the others in `related_fallacies`.
 

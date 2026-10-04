@@ -5,6 +5,8 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 python3 "$ROOT/scripts/lint_taxonomy.py"
+python3 "$ROOT/scripts/load_taxonomy.py" > "$TMP/taxonomy.json"
+python3 -m json.tool "$TMP/taxonomy.json" > /dev/null
 python3 "$ROOT/scripts/prepare_input.py" "$ROOT/examples/input_zh.txt" > "$TMP/prepared.json"
 python3 "$ROOT/scripts/validate_report.py" \
   --input "$ROOT/examples/input_zh.txt" \

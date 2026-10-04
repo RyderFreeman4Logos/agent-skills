@@ -1,0 +1,260 @@
+[
+  {
+    "id": "spotlight_fallacy",
+    "name_zh": "一孔之见",
+    "name_en": "Spotlight Fallacy",
+    "aliases_zh": [
+      "聚光灯谬误",
+      "显著性样本谬误"
+    ],
+    "aliases_en": [
+      "spotlight fallacy"
+    ],
+    "group": "generalization",
+    "definition": "把媒体、社交网络或注意力机制高度可见的案例当成总体的典型分布。",
+    "diagnostic_question": "被看到的案例是否因为显著性而过度代表总体？",
+    "false_positive_guard": "高可见度数据有时是真实趋势的信号，但必须用总体数据校验。"
+  },
+  {
+    "id": "confirmation_bias_argument",
+    "name_zh": "确认偏误",
+    "name_en": "Confirmation Bias",
+    "aliases_zh": [
+      "确认偏差"
+    ],
+    "aliases_en": [
+      "confirmation bias"
+    ],
+    "group": "evidence_selection",
+    "definition": "只寻找、强调或保留支持既有观点的证据，同时系统性忽略反证。",
+    "diagnostic_question": "是否对支持与反对证据采用了不对称的搜索、采信或评价标准？",
+    "false_positive_guard": "单次遗漏反证不一定构成模式；最好有证据表明选择机制具有方向性。"
+  },
+  {
+    "id": "false_dilemma",
+    "name_zh": "伪二分法",
+    "name_en": "False Dilemma",
+    "aliases_zh": [
+      "非黑即白",
+      "虚假两难",
+      "错误二分"
+    ],
+    "aliases_en": [
+      "false dilemma",
+      "false dichotomy",
+      "black-or-white"
+    ],
+    "group": "alternatives",
+    "definition": "把两个选项呈现为全部可能性，隐去合理的第三种或连续方案。",
+    "diagnostic_question": "真的只有这两个互斥且穷尽的选项吗？",
+    "false_positive_guard": "某些系统确实只有两个选项；需证明选项集合是否穷尽。"
+  },
+  {
+    "id": "lie",
+    "name_zh": "谎言",
+    "name_en": "Lie",
+    "aliases_zh": [
+      "故意虚假陈述"
+    ],
+    "aliases_en": [
+      "lie"
+    ],
+    "group": "rhetoric",
+    "definition": "明知陈述为假仍把它作为事实提出。严格说这不是由逻辑形式本身即可诊断的谬误，而是需要意图证据的欺骗行为。",
+    "diagnostic_question": "是否有证据证明说话者不仅说错了，而且知道其为假？",
+    "false_positive_guard": "仅凭陈述错误不能断言‘撒谎’；若缺乏意图证据，应改称错误陈述或待核查事实。"
+  },
+  {
+    "id": "misleading_vividness",
+    "name_zh": "误导性鲜活个案",
+    "name_en": "Misleading Vividness",
+    "aliases_zh": [
+      "鲜活性谬误",
+      "生动性误导"
+    ],
+    "aliases_en": [
+      "misleading vividness"
+    ],
+    "group": "rhetoric",
+    "definition": "用极其生动、罕见或情绪强烈的个案制造其普遍或高概率的印象。",
+    "diagnostic_question": "案例的生动程度是否替代了发生率、基准率或总体分布？",
+    "false_positive_guard": "生动案例可以说明后果形态，但不能单独证明频率。"
+  },
+  {
+    "id": "red_herring",
+    "name_zh": "转移注意",
+    "name_en": "Red Herring",
+    "aliases_zh": [
+      "红鲱鱼",
+      "转移话题"
+    ],
+    "aliases_en": [
+      "red herring"
+    ],
+    "group": "relevance",
+    "definition": "引入看似相关但不能解决当前争点的材料，使讨论偏离原问题。",
+    "diagnostic_question": "新材料是否真正回答了当前主张，还是把注意力转到另一个问题？",
+    "false_positive_guard": "背景信息可能相关；关键是它是否改变对原争点的证据或推理。"
+  },
+  {
+    "id": "slippery_slope",
+    "name_zh": "滑坡谬误",
+    "name_en": "Slippery Slope",
+    "aliases_zh": [
+      "滑坡"
+    ],
+    "aliases_en": [
+      "slippery slope"
+    ],
+    "group": "causality",
+    "definition": "声称一个起点会通过一连串步骤不可避免地导致极端结果，却未充分支持关键中间环节或概率。",
+    "diagnostic_question": "链条中的每一步是否有机制和概率支持？为什么会不可避免？",
+    "false_positive_guard": "有机制、有数据的连锁风险分析不是谬误；问题是不受支持的必然化。"
+  },
+  {
+    "id": "suppressed_evidence",
+    "name_zh": "隐瞒证据",
+    "name_en": "Suppressed Evidence",
+    "aliases_zh": [
+      "压制证据",
+      "选择性隐瞒"
+    ],
+    "aliases_en": [
+      "suppressed evidence",
+      "cherry-picking by omission"
+    ],
+    "group": "evidence_selection",
+    "definition": "省略对自身结论显著不利且应纳入判断的重要证据。",
+    "diagnostic_question": "是否存在已知、相关、重要的反证被选择性排除？",
+    "false_positive_guard": "简短表达不可能列出所有证据；要证明被省略信息足以实质改变判断。"
+  },
+  {
+    "id": "unfalsifiability",
+    "name_zh": "无法证伪",
+    "name_en": "Unfalsifiability",
+    "aliases_zh": [
+      "不可证伪"
+    ],
+    "aliases_en": [
+      "unfalsifiability",
+      "unfalsifiable claim"
+    ],
+    "group": "testability",
+    "definition": "提出一个无论出现什么观察结果都能被解释为正确、没有潜在反证条件的经验性主张。",
+    "diagnostic_question": "什么观察结果会让提出者承认该命题错了？如果没有，经验检验如何进行？",
+    "false_positive_guard": "数学、公理、价值陈述不以经验可证伪性为同一标准；不要跨领域机械应用。"
+  },
+  {
+    "id": "affirming_the_consequent",
+    "name_zh": "肯定后件",
+    "name_en": "Affirming the Consequent",
+    "aliases_zh": [
+      "肯定结果"
+    ],
+    "aliases_en": [
+      "affirming the consequent"
+    ],
+    "group": "formal",
+    "definition": "从‘如果 P 则 Q’和‘Q’推出‘P’，忽略 Q 可能由其他原因产生。",
+    "diagnostic_question": "Q 是否只能由 P 导致？若不是，为什么观察到 Q 就能推出 P？",
+    "false_positive_guard": "若额外证明 P 是 Q 的唯一充分解释，则推断可被加强。"
+  },
+  {
+    "id": "circular_reasoning",
+    "name_zh": "循环逻辑",
+    "name_en": "Circular Reasoning",
+    "aliases_zh": [
+      "循环论证"
+    ],
+    "aliases_en": [
+      "circular logic",
+      "circular reasoning"
+    ],
+    "group": "circularity",
+    "definition": "论据的成立最终依赖于待证明的结论，使支持链条绕回自身而缺乏独立根据。",
+    "diagnostic_question": "追踪理由链条后，是否最终又依赖原结论？",
+    "false_positive_guard": "概念互定义不一定是论证循环；重点是证成关系是否真正独立。"
+  },
+  {
+    "id": "correlation_causation",
+    "name_zh": "相关即因果",
+    "name_en": "Correlation-Causation Fallacy",
+    "aliases_zh": [
+      "相关不等于因果",
+      "同时发生即因果"
+    ],
+    "aliases_en": [
+      "cum hoc ergo propter hoc",
+      "correlation implies causation"
+    ],
+    "group": "causality",
+    "definition": "仅因两个变量相关或共同变化，就断言其中一个导致另一个。",
+    "diagnostic_question": "是否排除了反向因果、共同原因、选择偏差和巧合？",
+    "false_positive_guard": "相关性可以是因果推断的一部分；需要额外设计、机制或控制。"
+  },
+  {
+    "id": "denying_the_antecedent",
+    "name_zh": "否定前件",
+    "name_en": "Denying the Antecedent",
+    "aliases_zh": [
+      "否定条件前件"
+    ],
+    "aliases_en": [
+      "denying the antecedent"
+    ],
+    "group": "formal",
+    "definition": "从‘如果 P 则 Q’和‘非 P’推出‘非 Q’，忽略 Q 可能由其他路径成立。",
+    "diagnostic_question": "P 是 Q 的必要条件，还是仅仅充分条件？",
+    "false_positive_guard": "若已知 P 当且仅当 Q 或 P 是必要条件，结论才可成立。"
+  },
+  {
+    "id": "ignoring_common_cause",
+    "name_zh": "忽视主因",
+    "name_en": "Ignoring a Common Cause",
+    "aliases_zh": [
+      "忽略共同原因",
+      "混淆共同原因"
+    ],
+    "aliases_en": [
+      "ignoring a common cause",
+      "confounding"
+    ],
+    "group": "causality",
+    "definition": "看到 A 与 B 同时变化就认为 A 导致 B，却忽略可能同时导致二者的第三变量 C。",
+    "diagnostic_question": "是否存在一个共同原因能够同时解释 A 与 B？",
+    "false_positive_guard": "指出潜在混杂并不能自动推翻因果关系；应比较解释和控制证据。"
+  },
+  {
+    "id": "post_hoc",
+    "name_zh": "前后即因果",
+    "name_en": "Post Hoc Ergo Propter Hoc",
+    "aliases_zh": [
+      "在此之后因此由于此",
+      "先后即因果"
+    ],
+    "aliases_en": [
+      "post hoc ergo propter hoc",
+      "post hoc"
+    ],
+    "group": "causality",
+    "definition": "因为 B 在 A 之后发生，就断言 A 导致 B。",
+    "diagnostic_question": "除了时间先后，还有什么证据把 A 与 B 的因果机制连接起来？",
+    "false_positive_guard": "时间先后是因果的必要线索之一，但单独不足。"
+  },
+  {
+    "id": "two_wrongs_make_a_right",
+    "name_zh": "积非成是",
+    "name_en": "Two Wrongs Make a Right",
+    "aliases_zh": [
+      "以错纠错",
+      "两个错误变正确"
+    ],
+    "aliases_en": [
+      "two wrongs make a right"
+    ],
+    "group": "relevance",
+    "definition": "因为别人也做错了或先做错了，就把自己的错误行为说成正当。",
+    "diagnostic_question": "他人的错误为什么能改变当前行为本身的正当性？",
+    "false_positive_guard": "报复、对等和执法有时存在规范基础，但需要独立原则，而非‘别人也错’本身。"
+  }
+]

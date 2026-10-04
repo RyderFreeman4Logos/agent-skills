@@ -6,9 +6,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
-TAXONOMY = ROOT / "references" / "fallacies.json"
+from load_taxonomy import load_taxonomy
 
 REQUIRED_FINDING_FIELDS = {
     "fallacy_id",
@@ -40,7 +38,7 @@ def main() -> int:
 
     original = Path(args.input).read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
     report = load_json(Path(args.report))
-    taxonomy = load_json(TAXONOMY)
+    taxonomy = load_taxonomy()
     by_id = {x["id"]: x for x in taxonomy["fallacies"]}
 
     errors: list[str] = []

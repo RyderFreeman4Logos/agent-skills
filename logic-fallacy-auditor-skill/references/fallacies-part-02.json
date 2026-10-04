@@ -1,0 +1,259 @@
+[
+  {
+    "id": "wishful_thinking",
+    "name_zh": "一厢情愿",
+    "name_en": "Wishful Thinking",
+    "aliases_zh": [
+      "愿望思维"
+    ],
+    "aliases_en": [
+      "wishful thinking",
+      "appeal to wishful thinking"
+    ],
+    "group": "evidence",
+    "definition": "因为希望某事为真（或不希望其为真）而提高其真实性判断。",
+    "diagnostic_question": "愿望本身是否被当成了证据？",
+    "false_positive_guard": "愿望可以影响目标选择，但不能直接证明事实命题。"
+  },
+  {
+    "id": "anecdotal_evidence",
+    "name_zh": "轶事证据",
+    "name_en": "Anecdotal Evidence",
+    "aliases_zh": [
+      "个案证据",
+      "逸闻证据"
+    ],
+    "aliases_en": [
+      "anecdotal fallacy",
+      "anecdotal evidence"
+    ],
+    "group": "evidence",
+    "definition": "用少数个人经历或孤立案例替代更系统、代表性的证据，尤其用来否定统计规律。",
+    "diagnostic_question": "这个个案能否代表目标总体，还是只是一个可能存在的例外？",
+    "false_positive_guard": "个案可以用于提出假设、证明‘至少存在一个’或揭示机制；其证明力取决于结论范围。"
+  },
+  {
+    "id": "composition",
+    "name_zh": "合成谬误",
+    "name_en": "Composition",
+    "aliases_zh": [
+      "合成错误"
+    ],
+    "aliases_en": [
+      "fallacy of composition"
+    ],
+    "group": "part_whole",
+    "definition": "因为部分具有某性质，就推断整体必然具有同一性质。",
+    "diagnostic_question": "该性质从部分到整体是否可加、可传递？",
+    "false_positive_guard": "某些性质确实可从部分合成到整体；必须检查性质类型。"
+  },
+  {
+    "id": "division",
+    "name_zh": "分割谬误",
+    "name_en": "Division",
+    "aliases_zh": [
+      "分割错误"
+    ],
+    "aliases_en": [
+      "fallacy of division"
+    ],
+    "group": "part_whole",
+    "definition": "因为整体具有某性质，就推断每个组成部分也具有该性质。",
+    "diagnostic_question": "整体性质是否必然分配到每个成员？",
+    "false_positive_guard": "有些整体性质确实由每个成员共享，但需要额外前提。"
+  },
+  {
+    "id": "design_fallacy",
+    "name_zh": "设计谬误",
+    "name_en": "Design Fallacy",
+    "aliases_zh": [
+      "美观谬误",
+      "视觉权威谬误"
+    ],
+    "aliases_en": [
+      "design fallacy",
+      "aesthetic credibility fallacy"
+    ],
+    "group": "rhetoric",
+    "definition": "因为信息、图表或论证呈现得专业、美观、精致，就赋予其额外真实性或可信度。",
+    "diagnostic_question": "视觉设计是否被误当成了数据质量、方法或逻辑正确性的证据？",
+    "false_positive_guard": "良好设计可提高可读性，但不能替代来源、方法和推理验证。"
+  },
+  {
+    "id": "gamblers_fallacy",
+    "name_zh": "赌徒谬误",
+    "name_en": "Gambler's Fallacy",
+    "aliases_zh": [
+      "赌徒错误"
+    ],
+    "aliases_en": [
+      "gambler's fallacy"
+    ],
+    "group": "probability",
+    "definition": "对独立随机事件误以为过去结果会使相反结果‘该出现了’或改变下一次概率。",
+    "diagnostic_question": "这些事件是否独立？过去频率为什么会改变下一次的生成概率？",
+    "false_positive_guard": "如果抽样不是独立同分布，历史确实可能改变后续概率，需先判断过程。"
+  },
+  {
+    "id": "hasty_generalization",
+    "name_zh": "轻率概化",
+    "name_en": "Hasty Generalization",
+    "aliases_zh": [
+      "草率概括"
+    ],
+    "aliases_en": [
+      "hasty generalisation",
+      "hasty generalization"
+    ],
+    "group": "generalization",
+    "definition": "从过少或信息不足的样本直接推出广泛结论。",
+    "diagnostic_question": "样本量和证据量是否足以支撑结论覆盖的范围？",
+    "false_positive_guard": "小样本在强效应或确定性反例场景可能足够；要按结论类型判断。"
+  },
+  {
+    "id": "jumping_to_conclusions",
+    "name_zh": "妄下定论",
+    "name_en": "Jumping to Conclusions",
+    "aliases_zh": [
+      "仓促下结论"
+    ],
+    "aliases_en": [
+      "jumping to conclusions"
+    ],
+    "group": "evidence",
+    "definition": "在容易获得的重要证据尚未考虑前就快速做出确定性判断。",
+    "diagnostic_question": "是否存在明显相关、可获得但被忽略的信息？",
+    "false_positive_guard": "快速判断在时间受限情境可能合理，但置信度应与证据相匹配。"
+  },
+  {
+    "id": "middle_ground",
+    "name_zh": "中间立场",
+    "name_en": "Middle Ground",
+    "aliases_zh": [
+      "中间道路谬误",
+      "折中谬误"
+    ],
+    "aliases_en": [
+      "middle ground",
+      "middle ground fallacy"
+    ],
+    "group": "compromise",
+    "definition": "仅因为两方意见相反，就假定真相或正确方案必定位于两者之间。",
+    "diagnostic_question": "为什么两个主张的中点比任一端点更有证据？",
+    "false_positive_guard": "折中可以是谈判策略或价值选择；谬误在于把折中位置当作事实正确性的证明。"
+  },
+  {
+    "id": "perfectionist_fallacy",
+    "name_zh": "完美主义谬误",
+    "name_en": "Perfectionist Fallacy",
+    "aliases_zh": [
+      "完美方案谬误",
+      "涅槃谬误"
+    ],
+    "aliases_en": [
+      "perfectionist fallacy",
+      "nirvana fallacy"
+    ],
+    "group": "comparison",
+    "definition": "因为方案不能完美解决问题，就断言它没有价值或应被拒绝。",
+    "diagnostic_question": "比较标准是现实替代方案，还是不可达的完美状态？",
+    "false_positive_guard": "某些任务确实要求接近零失败；此时高标准可能合理。"
+  },
+  {
+    "id": "relativist_fallacy",
+    "name_zh": "相对论谬误",
+    "name_en": "Relativist Fallacy",
+    "aliases_zh": [
+      "相对主义谬误"
+    ],
+    "aliases_en": [
+      "relativist fallacy"
+    ],
+    "group": "truth",
+    "definition": "仅以‘对你是真的、对我不是真的’回避本可客观评估的事实命题。",
+    "diagnostic_question": "该命题是真正主观/规范性的，还是具有共同事实判准？",
+    "false_positive_guard": "偏好和某些价值判断可以合法相对化；不要把主观差异误判为谬误。"
+  },
+  {
+    "id": "biased_generalization",
+    "name_zh": "以偏概全",
+    "name_en": "Biased Generalization",
+    "aliases_zh": [
+      "偏差概括",
+      "代表性偏差概括"
+    ],
+    "aliases_en": [
+      "biased generalising",
+      "biased generalization"
+    ],
+    "group": "generalization",
+    "definition": "从系统性不具代表性、存在选择偏差的样本推断总体。",
+    "diagnostic_question": "样本是如何产生的？其选择机制会不会偏向某类结果？",
+    "false_positive_guard": "非随机样本并非必然无效，但需要说明其对目标总体的代表性。"
+  },
+  {
+    "id": "sweeping_generalization",
+    "name_zh": "一概而论",
+    "name_en": "Sweeping Generalization",
+    "aliases_zh": [
+      "扫荡式概括",
+      "规则误用"
+    ],
+    "aliases_en": [
+      "sweeping generalisation",
+      "sweeping generalization"
+    ],
+    "group": "generalization",
+    "definition": "把通常成立的规则不加条件地应用到明显存在例外或边界条件的个案。",
+    "diagnostic_question": "这条一般规则是否有相关例外，而当前个案恰好处在例外条件中？",
+    "false_positive_guard": "一般规则可以支持默认推断，但应允许与证据相符的例外。"
+  },
+  {
+    "id": "undistributed_middle",
+    "name_zh": "中词不周延",
+    "name_en": "Undistributed Middle",
+    "aliases_zh": [
+      "中项不周延"
+    ],
+    "aliases_en": [
+      "undistributed middle"
+    ],
+    "group": "formal",
+    "definition": "因为两个对象都具有某个共同属性，就错误地推出它们彼此相同、属于同一类或有更强关系。",
+    "diagnostic_question": "共同拥有中间属性 C，为什么能推出 A 与 B 的关系？",
+    "false_positive_guard": "如果还有包含关系或排他条件等额外前提，结论可能成立。"
+  },
+  {
+    "id": "ad_hoc_rescue",
+    "name_zh": "临阵救援",
+    "name_en": "Ad Hoc Rescue",
+    "aliases_zh": [
+      "特设救援",
+      "临时补丁谬误"
+    ],
+    "aliases_en": [
+      "ad hoc rescue"
+    ],
+    "group": "belief_protection",
+    "definition": "面对反证时不断添加只为保护原结论、且缺乏独立依据的新解释。",
+    "diagnostic_question": "新增假设是否有独立可检验依据，还是只在反证出现后为保住结论而加入？",
+    "false_positive_guard": "科学理论也会增加辅助假设；关键在于新假设是否独立可检验并提高解释/预测能力。"
+  },
+  {
+    "id": "begging_the_question",
+    "name_zh": "乞求论题",
+    "name_en": "Begging the Question",
+    "aliases_zh": [
+      "窃取论点",
+      "预设结论"
+    ],
+    "aliases_en": [
+      "begging the question",
+      "petitio principii"
+    ],
+    "group": "circularity",
+    "definition": "在前提中直接或变相预设了需要证明的结论。",
+    "diagnostic_question": "如果不先接受结论，前提还能独立成立吗？",
+    "false_positive_guard": "与循环论证高度相关；应指出具体预设，而不只贴标签。"
+  }
+]

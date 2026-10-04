@@ -1,0 +1,271 @@
+[
+  {
+    "id": "appeal_to_anonymous_authority",
+    "name_zh": "诉诸匿名权威",
+    "name_en": "Appeal to Anonymous Authority",
+    "aliases_zh": [
+      "匿名权威"
+    ],
+    "aliases_en": [
+      "anonymous authority"
+    ],
+    "group": "authority",
+    "definition": "用无法识别或核验的‘专家、研究、大家都说’作为关键证据。",
+    "diagnostic_question": "如果去掉这个匿名来源，结论是否仍有可检查的证据支持？",
+    "false_positive_guard": "匿名并不自动使信息为假；问题在于匿名性是否阻止了对资质、方法或原始证据的核验。"
+  },
+  {
+    "id": "appeal_to_questionable_authority",
+    "name_zh": "诉诸（可疑）权威",
+    "name_en": "Appeal to Questionable Authority",
+    "aliases_zh": [
+      "诉诸可疑权威"
+    ],
+    "aliases_en": [
+      "appeal to dubious authority",
+      "questionable authority"
+    ],
+    "group": "authority",
+    "definition": "把不具备相关领域资质、可靠性不足或利益冲突严重的权威意见当作结论成立的主要理由。",
+    "diagnostic_question": "被引用者是否真的具备与该命题相匹配的专业能力和可靠性？",
+    "false_positive_guard": "合格专家意见可以是合理证据，尤其当它代表相关领域共识并可追溯到证据时。"
+  },
+  {
+    "id": "appeal_to_common_practice",
+    "name_zh": "诉诸常规",
+    "name_en": "Appeal to Common Practice",
+    "aliases_zh": [
+      "诉诸惯例"
+    ],
+    "aliases_en": [
+      "common practice"
+    ],
+    "group": "appeal",
+    "definition": "因为某做法很常见，就推断它正确、合理、道德或不会造成问题。",
+    "diagnostic_question": "‘大家都这样做’与待证明的正确性之间有什么独立联系？",
+    "false_positive_guard": "常见程度有时与可行性或社会规范相关，但不能单独证明事实真伪或道德正当性。"
+  },
+  {
+    "id": "appeal_to_ignorance",
+    "name_zh": "诉诸无知",
+    "name_en": "Appeal to Ignorance",
+    "aliases_zh": [
+      "无知论证"
+    ],
+    "aliases_en": [
+      "argument from ignorance"
+    ],
+    "group": "evidence",
+    "definition": "因为一个命题尚未被证明为假，就断言它为真；或反之。",
+    "diagnostic_question": "缺少反证为何能够充当正面证据？",
+    "false_positive_guard": "在某些封闭搜索空间里，‘没有发现’可以构成证据，但需要说明搜索能力和预期可观测性。"
+  },
+  {
+    "id": "personal_incredulity",
+    "name_zh": "诉诸怀疑",
+    "name_en": "Personal Incredulity",
+    "aliases_zh": [
+      "个人怀疑",
+      "诉诸难以置信"
+    ],
+    "aliases_en": [
+      "appeal to incredulity",
+      "argument from incredulity"
+    ],
+    "group": "appeal",
+    "definition": "因为自己难以想象、理解或相信某事，就据此否定它。",
+    "diagnostic_question": "个人的理解困难是否被当成了关于世界的证据？",
+    "false_positive_guard": "指出机制缺失可以是合理批评；仅仅‘我想不通’则不足以否定命题。"
+  },
+  {
+    "id": "appeal_to_money",
+    "name_zh": "身价逻辑",
+    "name_en": "Appeal to Money",
+    "aliases_zh": [
+      "诉诸财富",
+      "诉诸价格"
+    ],
+    "aliases_en": [
+      "appeal to wealth",
+      "appeal to money"
+    ],
+    "group": "appeal",
+    "definition": "把价格高、财富多、地位高等经济信号直接当作真实性、质量或正确性的证明。",
+    "diagnostic_question": "财富/价格与当前待证命题之间是否有可靠的因果或统计联系？",
+    "false_positive_guard": "价格有时包含市场信息，但必须说明为什么该市场信号对当前结论有效。"
+  },
+  {
+    "id": "appeal_to_novelty",
+    "name_zh": "求新逻辑",
+    "name_en": "Appeal to Novelty",
+    "aliases_zh": [
+      "诉诸新颖",
+      "诉诸新事物"
+    ],
+    "aliases_en": [
+      "appeal to novelty"
+    ],
+    "group": "appeal",
+    "definition": "仅因为某事物更新，就推断它更好、更真或更有效。",
+    "diagnostic_question": "‘更新’本身为什么能证明性能、真实性或价值更高？",
+    "false_positive_guard": "新版本可能确有改进，但需要具体比较或证据。"
+  },
+  {
+    "id": "bandwagon",
+    "name_zh": "诉诸主流",
+    "name_en": "Bandwagon / Appeal to Popular Belief",
+    "aliases_zh": [
+      "乐队花车",
+      "从众谬误",
+      "诉诸多数"
+    ],
+    "aliases_en": [
+      "bandwagon",
+      "appeal to popularity",
+      "ad populum"
+    ],
+    "group": "appeal",
+    "definition": "因为许多人相信或支持某观点，就把人数本身当作它正确的证明。",
+    "diagnostic_question": "多数人的相信是否被用来替代独立证据？",
+    "false_positive_guard": "群体共识在某些知识聚合场景可以提供概率证据，但需要说明群体的信息质量和独立性。"
+  },
+  {
+    "id": "appeal_to_probability",
+    "name_zh": "诉诸概率",
+    "name_en": "Appeal to Probability",
+    "aliases_zh": [
+      "概率诉诸"
+    ],
+    "aliases_en": [
+      "appeal to probability"
+    ],
+    "group": "probability",
+    "definition": "因为某事可能发生，就断言它必然、迟早或实际上已经发生。",
+    "diagnostic_question": "从‘可能’到‘必然/已经’的概率跃迁有何依据？",
+    "false_positive_guard": "高概率预测不是谬误；问题是把非零可能性直接升级为确定性。"
+  },
+  {
+    "id": "appeal_to_tradition",
+    "name_zh": "诉诸传统",
+    "name_en": "Appeal to Tradition",
+    "aliases_zh": [
+      "传统诉诸"
+    ],
+    "aliases_en": [
+      "appeal to tradition"
+    ],
+    "group": "appeal",
+    "definition": "因为某观念或做法历史悠久，就推断它正确、最佳或应当继续。",
+    "diagnostic_question": "历史延续本身为何证明当前条件下仍然正确？",
+    "false_positive_guard": "传统可以携带经验信息，但仍需评估其形成条件和当前适用性。"
+  },
+  {
+    "id": "appeal_to_consequences",
+    "name_zh": "掩耳盗铃",
+    "name_en": "Appeal to Consequences of a Belief",
+    "aliases_zh": [
+      "诉诸后果",
+      "诉诸信念后果"
+    ],
+    "aliases_en": [
+      "appeal to consequences"
+    ],
+    "group": "appeal",
+    "definition": "因为相信某命题会导致令人不愿接受的后果，就据此判定命题为假；或因后果令人愉快而判定为真。",
+    "diagnostic_question": "一个命题令人喜欢或害怕的后果，为什么能改变它的事实真值？",
+    "false_positive_guard": "当论题本身是政策选择或价值判断时，后果当然相关；本谬误针对把后果当作事实真值证据。"
+  },
+  {
+    "id": "appeal_to_fear",
+    "name_zh": "诉诸恐惧",
+    "name_en": "Appeal to Fear",
+    "aliases_zh": [
+      "恐惧诉诸"
+    ],
+    "aliases_en": [
+      "appeal to fear"
+    ],
+    "group": "emotion",
+    "definition": "用恐惧、威胁或灾难想象替代证明结论所需的证据。",
+    "diagnostic_question": "恐惧反应是否替代了风险概率、机制或证据？",
+    "false_positive_guard": "真实风险本身可以构成合理理由；应区分有证据的风险分析与单纯恐吓。"
+  },
+  {
+    "id": "appeal_to_flattery",
+    "name_zh": "诉诸谄媚",
+    "name_en": "Appeal to Flattery",
+    "aliases_zh": [
+      "谄媚诉诸"
+    ],
+    "aliases_en": [
+      "appeal to flattery"
+    ],
+    "group": "emotion",
+    "definition": "通过赞美受众来诱导其接受一个与赞美无关、缺乏支持的主张。",
+    "diagnostic_question": "赞美与结论之间存在什么逻辑联系？",
+    "false_positive_guard": "礼貌或建立关系不等于谬误；关键是赞美是否承担了证据角色。"
+  },
+  {
+    "id": "appeal_to_nature",
+    "name_zh": "诉诸自然",
+    "name_en": "Appeal to Nature",
+    "aliases_zh": [
+      "自然主义诉诸"
+    ],
+    "aliases_en": [
+      "appeal to nature"
+    ],
+    "group": "appeal",
+    "definition": "把‘天然/自然’直接等同于更好、更安全、更道德或更真实。",
+    "diagnostic_question": "为什么‘自然’这一属性能够推出所声称的价值或安全性？",
+    "false_positive_guard": "自然属性可能与某些具体风险相关，但必须给出具体机制，而不是把‘自然’当作价值标签。"
+  },
+  {
+    "id": "appeal_to_pity",
+    "name_zh": "诉诸同情",
+    "name_en": "Appeal to Pity",
+    "aliases_zh": [
+      "同情诉诸"
+    ],
+    "aliases_en": [
+      "appeal to pity",
+      "ad misericordiam"
+    ],
+    "group": "emotion",
+    "definition": "用同情、可怜或个人困境替代对事实、责任或结论的相关证明。",
+    "diagnostic_question": "同情为何能证明当前事实命题或免除与问题相关的标准？",
+    "false_positive_guard": "在慈善、量刑、资源分配等价值决策中，同情可能是相关考虑；不应机械标注。"
+  },
+  {
+    "id": "appeal_to_ridicule",
+    "name_zh": "诉诸荒谬",
+    "name_en": "Appeal to Ridicule",
+    "aliases_zh": [
+      "诉诸嘲笑",
+      "嘲笑谬误"
+    ],
+    "aliases_en": [
+      "appeal to ridicule"
+    ],
+    "group": "rhetoric",
+    "definition": "把对方观点描述得可笑、荒诞，以嘲弄代替反驳。",
+    "diagnostic_question": "除了让观点显得可笑之外，是否真正指出了前提或推理错误？",
+    "false_positive_guard": "使用幽默不等于谬误；只有当嘲笑承担反驳功能时才构成问题。"
+  },
+  {
+    "id": "appeal_to_spite",
+    "name_zh": "诉诸仇恨",
+    "name_en": "Appeal to Spite",
+    "aliases_zh": [
+      "诉诸怨恨",
+      "诉诸厌恶"
+    ],
+    "aliases_en": [
+      "appeal to spite"
+    ],
+    "group": "emotion",
+    "definition": "借助对某人或群体的仇恨、厌恶来否定其主张，而不处理主张本身。",
+    "diagnostic_question": "负面情绪是否替代了对论点内容的评估？",
+    "false_positive_guard": "相关的利益冲突或行为记录可以影响可信度，但需要具体联系。"
+  }
+]

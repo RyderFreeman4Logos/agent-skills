@@ -5,14 +5,16 @@ A portable agent skill for analyzing whether input text contains logical fallaci
 ## What is included
 
 - `SKILL.md` — main agent instructions.
-- `references/fallacies.json` — 65-concept bilingual taxonomy.
-- `references/65-fallacies.md` — readable reference.
+- `references/fallacies.json` — manifest for the machine-readable taxonomy parts; `scripts/load_taxonomy.py` reconstructs the complete 65-concept object.
+- `references/fallacies-part-01.json` through `fallacies-part-04.json` — ordered data parts listed by the manifest.
+- `references/65-fallacies.md` — index linking the 65 entries across three ordered human-readable parts.
 - `references/methodology.md` — anti-false-positive rules and adjudication method.
 - `references/sources.md` — external references and provenance.
 - `references/workflow-migration.md` — design for turning the skill into a workflow later.
 - `schemas/report.schema.json` — structured output contract.
 - `scripts/prepare_input.py` — deterministic input normalization/chunking.
 - `scripts/validate_report.py` — validates IDs, fields, confidence, and verbatim evidence quotes.
+- `scripts/load_taxonomy.py` — assembles the manifest and data parts into the original JSON object.
 - `scripts/render_report.py` — converts structured JSON to Markdown.
 - `scripts/lint_taxonomy.py` — checks taxonomy integrity.
 - `examples/` — working Chinese example.
