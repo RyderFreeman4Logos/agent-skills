@@ -1,63 +1,114 @@
 #!/usr/bin/env python3
-"""Render structured fallacy-analysis JSON as Markdown."""
+"""Render a v2 report while keeping untrusted multiline text inside quotes."""
 
 from __future__ import annotations
+
+import argparse
+import html
 import json
-import sys
 from pathlib import Path
 
 
-def esc(s) -> str:
-    return str(s).replace("\n", " ").strip()
+def inline(value) -> str:
+    text = str(value if value is not None else "")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    return html.escape(" ".join(text.splitlines()).strip(), quote=False)
+
+
+def block_quote(value) -> str:
+    text = str(value if value is not None else "")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    return "\n".join("> " + html.escape(line, quote=False) for line in text.split("\n"))
+
+
+def render(report: dict) -> str:
+    out = ["# Reasoning Audit", "", f"Version: {inline(report.get('analysis_version'))}", ""]
+    summary = report.get("summary", {})
+    out.extend(["## Summary", "", inline(summary.get("overall")), "", f"**Most important:** {inline(summary.get('most_important'))}", ""])
+
+    findings = report.get("findings", [])
+    out.extend(["## Findings", ""])
+    if not findings:
+        out.extend(["No material reasoning defect was established.", ""])
+    for index, finding in enumerate(findings, 1):
+        reconstruction = finding.get("faithful_reconstruction", {})
+        out.extend([f"### Finding {index}", "", "**Evidence quote:**", block_quote(finding.get("evidence_quote")), ""])
+        out.append("**Faithful reconstruction:**")
+        for premise in reconstruction.get("premises", []):
+            out.append(f"- Premise: {inline(premise)}")
+        out.extend([
+            f"- Conclusion: {inline(reconstruction.get('conclusion'))}",
+            f"- Inference: {inline(reconstruction.get('inference'))}",
+            f"- Target: {inline(finding.get('conclusion_or_target'))}",
+            "",
+            f"**Reasoning issue ({inline(finding.get('issue_type'))}):** {inline(finding.get('reasoning_defect'))}",
+            f"**Why it matters:** {inline(finding.get('why_it_matters'))}",
+            f"**Strongest non-fallacious reading:** {inline(finding.get('strongest_non_fallacious_interpretation'))}",
+        ])
+        if finding.get("rescue_requires_new_premise"):
+            out.append(f"**New premise needed to rescue it:** {inline(finding.get('required_new_premise'))}")
+        else:
+            out.append("**New premise needed to rescue it:** No additional premise identified.")
+        out.extend([
+            f"**Adversarial review:** {inline(finding.get('adversarial_review'))}",
+            f"**Adjudication:** {inline(finding.get('adjudication'))}",
+        ])
+        if finding.get("fallacy_id") is None:
+            out.append("**Narrow taxonomy annotation:** None assigned.")
+        else:
+            out.append(f"**Narrow taxonomy annotation:** {inline(finding.get('name_zh'))} (`{inline(finding.get('fallacy_id'))}`)")
+        label_confidence = finding.get("label_confidence") or "not applicable"
+        out.extend([
+            f"**Confidence (defect / label / context):** {inline(finding.get('defect_confidence'))} / {inline(label_confidence)} / {inline(finding.get('context_completeness'))}",
+            f"**Fact-check needed:** {inline(finding.get('fact_check_needed'))}",
+            f"**Minimal repair:** {inline(finding.get('repair'))}",
+        ])
+        related = finding.get("related_fallacies", [])
+        if related:
+            out.append(f"**Related taxonomy entries:** {inline(', '.join(related))}")
+        out.append("")
+
+    out.extend(["## Non-findings", ""])
+    non_findings = report.get("non_findings", [])
+    if not non_findings:
+        out.extend(["No separate non-finding disposition was recorded.", ""])
+    for item in non_findings:
+        out.extend([
+            f"### {inline(item.get('disposition')).replace('_', ' ')}",
+            "",
+            "**Evidence quote:**",
+            block_quote(item.get("evidence_quote")),
+            "",
+            inline(item.get("reason")),
+        ])
+        conditional = item.get("conditional_diagnosis")
+        if conditional:
+            label = conditional.get("conditional_label_id") or "no narrow label"
+            out.extend([
+                "",
+                f"**Conditional diagnosis:** {inline(conditional.get('conditional_issue_type'))}; {inline(label)}",
+                f"**Condition:** {inline(conditional.get('condition'))}",
+                f"**Diagnosis if condition holds:** {inline(conditional.get('diagnosis'))}",
+            ])
+        out.append("")
+
+    checks = report.get("fact_checks_needed", [])
+    if checks:
+        out.extend(["## Claims needing external fact-check", ""])
+        out.extend(f"- {inline(item)}" for item in checks)
+        out.append("")
+    caveat = report.get("fallacy_fallacy_caveat")
+    if caveat:
+        out.extend(["## Caveat", "", inline(caveat), ""])
+    return "\n".join(out).rstrip() + "\n"
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        print(f"usage: {Path(sys.argv[0]).name} report.json", file=sys.stderr)
-        return 2
-    report = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    findings = report.get("findings", [])
-    print("# 逻辑谬误分析报告\n")
-    summary = report.get("summary", {})
-    print(f"- **总体结论：** {esc(summary.get('overall', ''))}")
-    print(f"- **发现数量：** {len(findings)}")
-    if summary.get("most_important"):
-        print(f"- **最重要的问题：** {esc(summary['most_important'])}")
-    print()
-
-    for i, f in enumerate(findings, 1):
-        print(f"## {i}. `{esc(f.get('fallacy_id', ''))}` — {esc(f.get('name_zh'))}（{esc(f.get('name_en'))}） — {float(f.get('confidence', 0)):.2f}")
-        print()
-        quote = f.get("evidence_quote", "").strip()
-        print("\n".join(f"> {line}" for line in quote.splitlines()))
-        print()
-        print(f"**目标/结论：** {esc(f.get('conclusion_or_target', ''))}\n")
-        print(f"**论证动作：** {esc(f.get('argumentative_move', ''))}\n")
-        print(f"**为什么有问题：** {esc(f.get('why_fallacious', ''))}\n")
-        print(f"**最强非谬误解释：** {esc(f.get('strongest_non_fallacious_interpretation', ''))}\n")
-        print(f"**裁定：** {esc(f.get('adjudication', ''))}\n")
-        print(f"**重要性：** {esc(f.get('centrality', ''))}\n")
-        print(f"**需要事实核查：** {'是' if f.get('fact_check_needed') else '否'}\n")
-        print(f"**如何修复：** {esc(f.get('repair', ''))}\n")
-
-    non_findings = report.get("important_non_findings", [])
-    if non_findings:
-        print("## 重要的非谬误项\n")
-        for x in non_findings:
-            print(f"- {esc(x)}")
-        print()
-
-    fact_checks = report.get("fact_checks_needed", [])
-    if fact_checks:
-        print("## 需要额外事实核查\n")
-        for x in fact_checks:
-            print(f"- {esc(x)}")
-        print()
-
-    caveat = report.get("fallacy_fallacy_caveat")
-    if caveat:
-        print("## 解释边界\n")
-        print(esc(caveat))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("report", help="Validated v2 JSON report")
+    args = parser.parse_args()
+    report = json.loads(Path(args.report).read_text(encoding="utf-8"))
+    print(render(report), end="")
     return 0
 
 

@@ -1,52 +1,108 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/logic-fallacy-auditor/report.schema.json",
-  "title": "Logic Fallacy Auditor Report",
+  "title": "Reasoning Audit Report",
+  "x-report-version": "2.0.0",
   "type": "object",
-  "required": ["analysis_version", "summary", "findings", "fallacy_fallacy_caveat"],
+  "required": ["analysis_version", "summary", "findings", "non_findings", "fact_checks_needed", "fallacy_fallacy_caveat"],
   "properties": {
-    "analysis_version": {"type": "string"},
+    "analysis_version": {"const": "2.0.0"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "non_findings": {"type": "array", "items": {"$ref": "#/$defs/non_finding"}},
+    "fact_checks_needed": {"type": "array", "items": {"type": "string"}},
+    "fallacy_fallacy_caveat": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "issue_type": {
+      "enum": ["invalid_deduction", "weak_induction", "causal_gap", "unsupported_claim", "irrelevant_support", "missing_premise", "inconsistency", "scope_or_quantifier_error", "ambiguity_or_equivocation", "evidence_selection_problem", "dialogue_defect", "rhetorical_substitution", "epistemic_problem", "definition_or_category_error", "unclassified_reasoning_issue"]
+    },
+    "confidence": {"enum": ["high", "medium", "low"]},
     "summary": {
       "type": "object",
       "required": ["overall", "most_important"],
+      "properties": {"overall": {"type": "string"}, "most_important": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "reconstruction": {
+      "type": "object",
+      "required": ["premises", "conclusion", "inference"],
       "properties": {
-        "overall": {"type": "string"},
-        "most_important": {"type": "string"}
+        "premises": {"type": "array", "items": {"type": "string"}},
+        "conclusion": {"type": "string", "minLength": 1},
+        "inference": {"type": "string", "minLength": 1}
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
-    "findings": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "fallacy_id", "name_zh", "name_en", "evidence_quote",
-          "conclusion_or_target", "argumentative_move", "why_fallacious",
-          "strongest_non_fallacious_interpretation", "adjudication",
-          "confidence", "centrality", "fact_check_needed", "repair"
-        ],
-        "properties": {
-          "fallacy_id": {"type": "string"},
-          "name_zh": {"type": "string"},
-          "name_en": {"type": "string"},
-          "evidence_quote": {"type": "string", "minLength": 1},
-          "conclusion_or_target": {"type": "string"},
-          "argumentative_move": {"type": "string"},
-          "why_fallacious": {"type": "string"},
-          "strongest_non_fallacious_interpretation": {"type": "string"},
-          "adjudication": {"type": "string"},
-          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-          "centrality": {"enum": ["central", "supporting", "rhetorical"]},
-          "fact_check_needed": {"type": "boolean"},
-          "related_fallacies": {"type": "array", "items": {"type": "string"}},
-          "repair": {"type": "string"}
+    "finding": {
+      "type": "object",
+      "required": ["issue_type", "fallacy_id", "name_zh", "name_en", "evidence_quote", "conclusion_or_target", "faithful_reconstruction", "reasoning_defect", "why_it_matters", "strongest_non_fallacious_interpretation", "rescue_requires_new_premise", "required_new_premise", "adversarial_review", "adjudication", "defect_confidence", "label_confidence", "context_completeness", "centrality", "fact_check_needed", "related_fallacies", "repair"],
+      "properties": {
+        "issue_type": {"$ref": "#/$defs/issue_type"},
+        "fallacy_id": {"type": ["string", "null"]},
+        "name_zh": {"type": ["string", "null"]},
+        "name_en": {"type": ["string", "null"]},
+        "evidence_quote": {"type": "string", "minLength": 1},
+        "conclusion_or_target": {"type": "string", "minLength": 1},
+        "faithful_reconstruction": {"$ref": "#/$defs/reconstruction"},
+        "reasoning_defect": {"type": "string", "minLength": 1},
+        "why_it_matters": {"type": "string", "minLength": 1},
+        "strongest_non_fallacious_interpretation": {"type": "string", "minLength": 1},
+        "rescue_requires_new_premise": {"type": "boolean"},
+        "required_new_premise": {"type": ["string", "null"]},
+        "adversarial_review": {"type": "string", "minLength": 1},
+        "adjudication": {"type": "string", "minLength": 1},
+        "defect_confidence": {"$ref": "#/$defs/confidence"},
+        "label_confidence": {"enum": ["high", "medium", "low", null]},
+        "context_completeness": {"$ref": "#/$defs/confidence"},
+        "centrality": {"enum": ["central", "supporting", "rhetorical"]},
+        "fact_check_needed": {"type": "boolean"},
+        "related_fallacies": {"type": "array", "items": {"type": "string"}},
+        "repair": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"fallacy_id": {"type": "null"}}},
+          "then": {"properties": {"name_zh": {"type": "null"}, "name_en": {"type": "null"}, "label_confidence": {"type": "null"}}},
+          "else": {"properties": {"name_zh": {"type": "string", "minLength": 1}, "name_en": {"type": "string", "minLength": 1}, "label_confidence": {"$ref": "#/$defs/confidence"}}}
         },
-        "additionalProperties": true
-      }
+        {
+          "if": {"properties": {"rescue_requires_new_premise": {"const": true}}},
+          "then": {"properties": {"required_new_premise": {"type": "string", "minLength": 1}}},
+          "else": {"properties": {"required_new_premise": {"type": "null"}}}
+        }
+      ],
+      "additionalProperties": false
     },
-    "important_non_findings": {"type": "array", "items": {"type": "string"}},
-    "fact_checks_needed": {"type": "array", "items": {"type": "string"}},
-    "fallacy_fallacy_caveat": {"type": "string"}
-  },
-  "additionalProperties": true
+    "conditional_diagnosis": {
+      "type": "object",
+      "required": ["conditional_issue_type", "conditional_label_id", "condition", "diagnosis"],
+      "properties": {
+        "conditional_issue_type": {"$ref": "#/$defs/issue_type"},
+        "conditional_label_id": {"type": ["string", "null"]},
+        "condition": {"type": "string", "minLength": 1},
+        "diagnosis": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "non_finding": {
+      "type": "object",
+      "required": ["disposition", "evidence_quote", "reason", "conditional_diagnosis"],
+      "properties": {
+        "disposition": {"enum": ["fact_check_needed", "unsupported_but_not_fallacious", "insufficient_context", "value_disagreement", "definition_disagreement", "rhetorical_style_only", "no_material_reasoning_problem"]},
+        "evidence_quote": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "conditional_diagnosis": {"anyOf": [{"$ref": "#/$defs/conditional_diagnosis"}, {"type": "null"}]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"disposition": {"const": "insufficient_context"}}},
+          "then": {"properties": {"conditional_diagnosis": {"$ref": "#/$defs/conditional_diagnosis"}}},
+          "else": {"properties": {"conditional_diagnosis": {"type": "null"}}}
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
 }
