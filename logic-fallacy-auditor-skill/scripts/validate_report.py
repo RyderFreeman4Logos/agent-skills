@@ -93,7 +93,8 @@ def main() -> int:
     else:
         required(summary, {"overall", "most_important"}, "summary", errors)
         for field in ("overall", "most_important"):
-            nonempty(summary.get(field), f"summary.{field}", errors)
+            if not isinstance(summary.get(field), str):
+                errors.append(f"summary.{field} must be a string")
 
     fact_checks = report.get("fact_checks_needed")
     string_list(fact_checks, "fact_checks_needed", errors)
@@ -191,9 +192,9 @@ def main() -> int:
         nonempty(item.get("reason"), f"{label}: reason", errors)
 
         diagnosis = item.get("conditional_diagnosis")
-        if disposition == "insufficient_context":
+        if disposition == "insufficient_context" and diagnosis is not None:
             if not isinstance(diagnosis, dict):
-                errors.append(f"{label}: insufficient_context requires conditional_diagnosis")
+                errors.append(f"{label}: conditional_diagnosis must be an object or null")
                 continue
             diagnosis_fields = {"conditional_issue_type", "conditional_label_id", "condition", "diagnosis"}
             required(diagnosis, diagnosis_fields, f"{label}: conditional_diagnosis", errors)

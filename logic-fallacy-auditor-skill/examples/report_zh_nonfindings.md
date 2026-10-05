@@ -17,14 +17,18 @@ No material reasoning defect was established.
 ### rhetorical style only
 
 **Evidence quote:**
+> ```
 > 你这个人真讨厌。
+> ```
 
 这句是不礼貌的人身评价；单独看没有将个人特征用作否定某项主张的理由，因此不据此判为人身攻击推理。
 
 ### insufficient context
 
 **Evidence quote:**
+> ```
 > 他把对手的主张概括为“全面禁止吸烟”，但材料没有附上对手原话。
+> ```
 
 缺少对手原话，无法判断该概括是否准确，也无法确认是否存在针对被扭曲立场的反驳。
 

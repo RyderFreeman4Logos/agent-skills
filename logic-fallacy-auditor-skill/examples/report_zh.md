@@ -13,7 +13,9 @@ Version: 2.0.0
 ### Finding 1
 
 **Evidence quote:**
+> ```
 > 我爷爷每天抽两包烟，活到92岁。所以吸烟不会缩短寿命。
+> ```
 
 **Faithful reconstruction:**
 - Premise: 说话者的祖父每天抽两包烟，活到92岁。
@@ -29,6 +31,7 @@ Version: 2.0.0
 **Adjudication:** 将原文按其总体结论理解时，个案不能支持结论，诊断成立。
 **Narrow taxonomy annotation:** 轶事证据 (`anecdotal_evidence`)
 **Confidence (defect / label / context):** high / high / high
+**Centrality:** central
 **Fact-check needed:** False
 **Minimal repair:** 比较有代表性的吸烟者与不吸烟者群体数据，并把结论限定为风险或期望寿命差异。
 **Related taxonomy entries:** hasty_generalization
@@ -36,7 +39,9 @@ Version: 2.0.0
 ### Finding 2
 
 **Evidence quote:**
+> ```
 > 你说吸烟有风险？你只是个没混出名堂的人，你的话当然不可信。
+> ```
 
 **Faithful reconstruction:**
 - Premise: 对方没有混出名堂。
@@ -52,13 +57,16 @@ Version: 2.0.0
 **Adjudication:** 原文以一般地位代替对论据的回应，诊断成立。
 **Narrow taxonomy annotation:** 人身攻击 (`ad_hominem`)
 **Confidence (defect / label / context):** high / high / high
+**Centrality:** supporting
 **Fact-check needed:** False
 **Minimal repair:** 直接回应对方使用的证据；若质疑其资质，说明具体资质与该命题的关系。
 
 ### Finding 3
 
 **Evidence quote:**
+> ```
 > 再说，天然的东西当然更安全。
+> ```
 
 **Faithful reconstruction:**
 - Premise: 某物是天然的。
@@ -74,13 +82,16 @@ Version: 2.0.0
 **Adjudication:** 文本直接把‘天然’当作安全性的理由，分类成立；实际安全性需另行核查。
 **Narrow taxonomy annotation:** 诉诸自然 (`appeal_to_nature`)
 **Confidence (defect / label / context):** high / high / high
+**Centrality:** supporting
 **Fact-check needed:** True
 **Minimal repair:** 提供与具体材料、剂量、暴露途径和使用场景相关的安全数据。
 
 ### Finding 4
 
 **Evidence quote:**
+> ```
 > 她按时提交了文件，所以文件符合审批标准。
+> ```
 
 **Faithful reconstruction:**
 - Premise: 她按时提交了文件。
@@ -96,6 +107,7 @@ Version: 2.0.0
 **Adjudication:** 文本未给出该规则，推理缺口成立；没有必要强贴某个谬误标签。
 **Narrow taxonomy annotation:** None assigned.
 **Confidence (defect / label / context):** high / not applicable / high
+**Centrality:** central
 **Fact-check needed:** False
 **Minimal repair:** 补充实际适用的内容审查规则，或把结论收窄为文件已按时提交。
 

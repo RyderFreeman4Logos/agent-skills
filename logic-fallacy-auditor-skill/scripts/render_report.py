@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 
 
@@ -18,7 +19,9 @@ def inline(value) -> str:
 def block_quote(value) -> str:
     text = str(value if value is not None else "")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    return "\n".join("> " + html.escape(line, quote=False) for line in text.split("\n"))
+    # A source delimiter cannot close the literal evidence block.
+    fence = "`" * max(3, 1 + max((len(run) for run in re.findall(r"`+", text)), default=0))
+    return "\n".join("> " + line for line in [fence, *text.split("\n"), fence])
 
 
 def render(report: dict) -> str:
@@ -60,6 +63,7 @@ def render(report: dict) -> str:
         label_confidence = finding.get("label_confidence") or "not applicable"
         out.extend([
             f"**Confidence (defect / label / context):** {inline(finding.get('defect_confidence'))} / {inline(label_confidence)} / {inline(finding.get('context_completeness'))}",
+            f"**Centrality:** {inline(finding.get('centrality'))}",
             f"**Fact-check needed:** {inline(finding.get('fact_check_needed'))}",
             f"**Minimal repair:** {inline(finding.get('repair'))}",
         ])
