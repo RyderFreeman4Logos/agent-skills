@@ -181,6 +181,6 @@ Do not treat chunk boundaries as argumentative boundaries.
 
 ## Scope note
 
-The bundled 65 concepts are the de-duplicated union used for this skill's initial taxonomy. Some entries are classical logical fallacies; others are informal fallacies, rhetorical manipulation patterns, or reasoning-quality warnings. The taxonomy is a detection vocabulary, **not a claim that every entry has identical status in formal logic**.
+The bundled 65 concepts are intentionally heterogeneous: formal and informal fallacies, dialogue failures, evidence-selection problems, rhetorical substitutions, cognitive/epistemic patterns, and intent-dependent deception such as lying. They provide familiar explanation labels, not a claim that every item has identical status in formal logic; `issue_type` captures the structural reasoning defect.
 
 For a broader search space, consult the Internet Encyclopedia of Philosophy reference in `references/sources.md`; it catalogs many more named fallacies. Do not automatically import a new label without explaining its definition.
