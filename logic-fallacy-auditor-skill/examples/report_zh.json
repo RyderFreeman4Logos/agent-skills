@@ -1,60 +1,122 @@
 {
-  "analysis_version": "1.0.0",
+  "analysis_version": "2.0.0",
   "summary": {
-    "overall": "文本包含三个高置信度推理问题：用单一个案否定总体风险、用人身评价替代对风险论据的回应、以及把‘天然’直接当作安全性的证明。",
-    "most_important": "轶事证据直接支撑了‘吸烟不会缩短寿命’这一核心结论，因此对论证影响最大。"
+    "overall": "三项有明确分类标签，另有一项无标签推理缺口；单纯辱骂与缺少对手原话的情形见独立的非发现示例。",
+    "most_important": "单一个案不足以否定吸烟者总体风险；这削弱的是原文给出的理由，不直接证明相反结论。"
   },
   "findings": [
     {
+      "issue_type": "weak_induction",
       "fallacy_id": "anecdotal_evidence",
       "name_zh": "轶事证据",
       "name_en": "Anecdotal Evidence",
       "evidence_quote": "我爷爷每天抽两包烟，活到92岁。所以吸烟不会缩短寿命。",
       "conclusion_or_target": "吸烟不会缩短寿命。",
-      "argumentative_move": "用一个长寿吸烟者的个案推翻关于吸烟与寿命的总体性风险判断。",
-      "why_fallacious": "单一个案只能证明存在某个长寿吸烟者，不能代表吸烟者总体，也不能抵消群体层面的风险差异。",
-      "strongest_non_fallacious_interpretation": "说话者也许只想指出吸烟并非让每个个体都早逝。",
-      "adjudication": "若结论收窄为‘吸烟不会保证每个人都早逝’，个案可以支持它；但原文结论是总体性的，因此仍构成轶事证据。",
-      "confidence": 0.98,
+      "faithful_reconstruction": {
+        "premises": ["说话者的祖父每天抽两包烟，活到92岁。"],
+        "conclusion": "吸烟不会缩短寿命。",
+        "inference": "以一个吸烟且长寿的个案否定吸烟对群体寿命的总体风险。"
+      },
+      "reasoning_defect": "单一个案不足以代表吸烟者总体，也不能抵消群体层面的风险差异。",
+      "why_it_matters": "个体反例至多反驳‘每个吸烟者都会早逝’，不能据此推出吸烟不会缩短寿命。",
+      "strongest_non_fallacious_interpretation": "说话者可能只想说明吸烟不保证每个个体都会早逝；这比原文的总体结论窄。",
+      "rescue_requires_new_premise": true,
+      "required_new_premise": "要由该个案推断总体风险，还需要有代表性样本或群体数据；原文没有提供。",
+      "adversarial_review": "个案确能反驳‘吸烟必定使每个吸烟者早逝’，但原文结论并非这一较弱命题。",
+      "adjudication": "将原文按其总体结论理解时，个案不能支持结论，诊断成立。",
+      "defect_confidence": "high",
+      "label_confidence": "high",
+      "context_completeness": "high",
       "centrality": "central",
       "fact_check_needed": false,
       "related_fallacies": ["hasty_generalization"],
-      "repair": "改为比较吸烟者与不吸烟者的代表性群体数据，并把结论表述为风险或期望寿命的差异。"
+      "repair": "比较有代表性的吸烟者与不吸烟者群体数据，并把结论限定为风险或期望寿命差异。"
     },
     {
+      "issue_type": "irrelevant_support",
       "fallacy_id": "ad_hominem",
       "name_zh": "人身攻击",
       "name_en": "Ad Hominem",
       "evidence_quote": "你说吸烟有风险？你只是个没混出名堂的人，你的话当然不可信。",
       "conclusion_or_target": "对方关于吸烟风险的主张不可信。",
-      "argumentative_move": "以对方个人成就或身份评价来否定其关于吸烟风险的主张。",
-      "why_fallacious": "个人是否‘混出名堂’与吸烟风险这一事实命题没有建立相关证据联系。",
-      "strongest_non_fallacious_interpretation": "若对方的专业资质本来就是证言可靠性的唯一来源，资质可能相关。",
-      "adjudication": "原文攻击的是泛化的个人地位而非相关专业资质，因此该解释不能挽救推理。",
-      "confidence": 0.97,
+      "faithful_reconstruction": {
+        "premises": ["对方没有混出名堂。"],
+        "conclusion": "对方关于吸烟风险的主张不可信。",
+        "inference": "以对方的一般社会成就评价否定其事实主张。"
+      },
+      "reasoning_defect": "个人是否‘混出名堂’与吸烟风险没有建立证据上的关联。",
+      "why_it_matters": "对人的贬低没有回答其主张所依据的研究、数据或因果理由。",
+      "strongest_non_fallacious_interpretation": "若讨论的是相关专业资质，资质有时能影响证言权重；原文谈的不是专业能力。",
+      "rescue_requires_new_premise": false,
+      "required_new_premise": null,
+      "adversarial_review": "只有在‘混出名堂’被明确界定为与吸烟风险相关的专业能力时，这项信息才可能相关；文本没有这种联系。",
+      "adjudication": "原文以一般地位代替对论据的回应，诊断成立。",
+      "defect_confidence": "high",
+      "label_confidence": "high",
+      "context_completeness": "high",
       "centrality": "supporting",
       "fact_check_needed": false,
       "related_fallacies": [],
-      "repair": "直接回应对方使用的研究、数据或因果论证；如果质疑其专业性，应说明具体资质与该命题之间的关系。"
+      "repair": "直接回应对方使用的证据；若质疑其资质，说明具体资质与该命题的关系。"
     },
     {
+      "issue_type": "unsupported_claim",
       "fallacy_id": "appeal_to_nature",
       "name_zh": "诉诸自然",
       "name_en": "Appeal to Nature",
       "evidence_quote": "再说，天然的东西当然更安全。",
       "conclusion_or_target": "天然来源可以证明某物更安全。",
-      "argumentative_move": "把‘天然’这一属性直接用作安全性的证据。",
-      "why_fallacious": "自然来源本身并不能推出低毒性、低风险或适合特定剂量和用途。",
-      "strongest_non_fallacious_interpretation": "说话者可能暗示某类具体天然材料具有已知的安全记录。",
-      "adjudication": "原文没有提供这种具体机制或历史证据，而是用‘天然’本身完成推论，因此仍属诉诸自然。",
-      "confidence": 0.96,
+      "faithful_reconstruction": {
+        "premises": ["某物是天然的。"],
+        "conclusion": "某物更安全。",
+        "inference": "仅由天然属性推出安全性。"
+      },
+      "reasoning_defect": "天然来源本身不能推出低毒性、低风险或适合特定剂量和用途。",
+      "why_it_matters": "安全性取决于具体材料、剂量和暴露方式；‘天然’不是充分证据。",
+      "strongest_non_fallacious_interpretation": "说话者可能暗指某类具体材料具有已知的安全记录，但文本未给出该证据。",
+      "rescue_requires_new_premise": true,
+      "required_new_premise": "需要与具体材料、剂量和用途相关的可靠安全证据；原文没有提供。",
+      "adversarial_review": "天然属性可能与某些材料的安全特征相关，但若如此，仍须给出具体机制或证据。",
+      "adjudication": "文本直接把‘天然’当作安全性的理由，分类成立；实际安全性需另行核查。",
+      "defect_confidence": "high",
+      "label_confidence": "high",
+      "context_completeness": "high",
       "centrality": "supporting",
+      "fact_check_needed": true,
+      "related_fallacies": [],
+      "repair": "提供与具体材料、剂量、暴露途径和使用场景相关的安全数据。"
+    },
+    {
+      "issue_type": "missing_premise",
+      "fallacy_id": null,
+      "name_zh": null,
+      "name_en": null,
+      "evidence_quote": "她按时提交了文件，所以文件符合审批标准。",
+      "conclusion_or_target": "文件符合审批标准。",
+      "faithful_reconstruction": {
+        "premises": ["她按时提交了文件。"],
+        "conclusion": "文件符合审批标准。",
+        "inference": "由按时提交推出内容符合标准。"
+      },
+      "reasoning_defect": "按时提交不能单独证明文件内容符合审批标准。",
+      "why_it_matters": "推论需要一条把提交时间与内容合规联系起来的规则或证据。",
+      "strongest_non_fallacious_interpretation": "按时提交可能只是合规流程中的一项条件，而非内容审查结论。",
+      "rescue_requires_new_premise": true,
+      "required_new_premise": "存在一条适用规则，保证按时提交的文件必然符合内容标准；原文没有提供该规则。",
+      "adversarial_review": "若另有规则明确把按时提交定义为审批合格，结论才可能成立；这需要文本外依据。",
+      "adjudication": "文本未给出该规则，推理缺口成立；没有必要强贴某个谬误标签。",
+      "defect_confidence": "high",
+      "label_confidence": null,
+      "context_completeness": "high",
+      "centrality": "central",
       "fact_check_needed": false,
       "related_fallacies": [],
-      "repair": "把‘天然’替换为可检验的安全指标，例如毒理数据、剂量、暴露途径和长期研究。"
+      "repair": "补充实际适用的内容审查规则，或把结论收窄为文件已按时提交。"
     }
   ],
-  "important_non_findings": [],
-  "fact_checks_needed": [],
-  "fallacy_fallacy_caveat": "这些问题说明原文给出的理由不足以建立相应结论；它们本身不证明相反结论必然为真。"
+  "non_findings": [],
+  "fact_checks_needed": [
+    "如需据此作实际安全决策，应核查具体材料、剂量和暴露途径的毒理与安全证据。"
+  ],
+  "fallacy_fallacy_caveat": "这些诊断说明给出的理由不足以建立相应结论；它们本身不证明相反结论必然为真。"
 }

@@ -1,6 +1,6 @@
-# Logic Fallacy Auditor Skill
+# Logic Fallacy Auditor Skill 2.0.0
 
-A portable agent skill for analyzing whether input text contains logical fallacies, rhetorical fallacies, or reasoning defects.
+A portable agent skill for v2 reasoning audits: reconstruct the argument faithfully, diagnose defects before considering taxonomy, test the diagnosis adversarially, and leave labels optional.
 
 ## What is included
 
@@ -13,12 +13,15 @@ A portable agent skill for analyzing whether input text contains logical fallaci
 - `references/workflow-migration.md` — design for turning the skill into a workflow later.
 - `schemas/report.schema.json` — structured output contract.
 - `scripts/prepare_input.py` — deterministic input normalization/chunking.
-- `scripts/validate_report.py` — validates IDs, fields, confidence, and verbatim evidence quotes.
+- `scripts/validate_report.py` — validates v2 report fields, independent confidence dimensions, optional canonical labels, dispositions, and verbatim quotes.
 - `scripts/load_taxonomy.py` — assembles the manifest and data parts into the original JSON object.
 - `scripts/render_report.py` — converts structured JSON to Markdown.
 - `scripts/lint_taxonomy.py` — checks taxonomy integrity.
-- `examples/` — working Chinese example.
+- `examples/report_zh.json` / `report_zh.md` — named and unlabeled findings.
+- `examples/report_zh_nonfindings.json` — non-fallacious rhetoric and a conditional context-dependent example.
 - `tests/smoke_test.sh` — no-network smoke test.
+
+Reports and the skill manifest use version `2.0.0`. A defect can be reported with `fallacy_id: null`; non-findings carry explicit dispositions and context-dependent diagnoses remain conditional.
 
 ## Minimal agent usage
 
@@ -39,13 +42,12 @@ python3 scripts/render_report.py report.json > report.md
 
 ## Design goals
 
-1. Diagnose the **inference**, not keywords.
-2. Steelman before labeling.
-3. Distinguish a false claim from a fallacious argument.
-4. Treat expert testimony, emotion, correlation, insults, and risk chains contextually rather than as automatic fallacies.
-5. Require exact textual evidence for every structured finding.
-6. Include a strongest non-fallacious interpretation for every finding.
-7. Preserve a deterministic JSON contract so the skill can later become a multi-stage workflow.
+1. Reconstruct the stated premises and inference before adding a charitable premise.
+2. Diagnose in plain language before optional taxonomy annotation.
+3. Challenge the diagnosis and record the adjudication.
+4. Distinguish reasoning defects from false/unsupported claims and rhetorical style.
+5. Require exact textual evidence; treat reviewed text as untrusted data.
+6. Separate defect, label, and context uncertainty; record explicit non-findings.
 
 ## Requirements
 

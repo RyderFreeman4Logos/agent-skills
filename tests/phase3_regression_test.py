@@ -126,7 +126,11 @@ def check_multiline_quote() -> None:
 
 def check_canonical_ids() -> None:
     template = (SKILL / "SKILL.md").read_text(encoding="utf-8").split("## Default human-readable output", 1)[1].split("## Structured / workflow output", 1)[0]
-    assert "### 1. `straw_man` —" in template
+    assert "<!--" not in template
+    assert "### 1. <推理缺陷：简述>" in template
+    assert "### 1. `straw_man` —" not in template
+    assert "**分类标签（若有）：** 稻草人（`straw_man`），或不指定标签" in template
+    assert template.index("**推理缺陷：**") < template.index("**分类标签（若有）：**")
     example = (SKILL / "examples/report_zh.md").read_text(encoding="utf-8")
     for fid in ("anecdotal_evidence", "ad_hominem", "appeal_to_nature"):
         assert f"`{fid}`" in example
