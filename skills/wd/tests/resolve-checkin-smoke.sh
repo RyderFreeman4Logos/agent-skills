@@ -60,6 +60,10 @@ printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'grok-chat = 0'
 printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'grok = "3s"' > "$tmp/nonnumeric.toml"
 printf '%s\n' 'schema_version = "1"' > "$tmp/bad-schema.toml"
 printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'openai = 808' > "$tmp/openai.toml"
+printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'openai-codex = ""' 'codex = 222' > "$tmp/empty.toml"
+printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'openai-codex = "\n\n"' 'codex = 222' > "$tmp/newlines.toml"
+printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'openai-codex = "009"' > "$tmp/leading-zero.toml"
+printf '%s\n' 'schema_version = 1' '' '[kv_cache.provider_ttls]' 'openai-codex = 9223372036854775807' > "$tmp/maximum.toml"
 
 expect_value openai-codex exact.toml 101
 expect_value openai-codex aliases.toml 202
@@ -77,5 +81,9 @@ expect_error unknown aliases.toml 'unsupported active provider: unknown'
 expect_error grok missing.toml 'skillcfg could not load its selected schema_version=1 configuration'
 expect_error grok bad-schema.toml 'skillcfg could not load its selected schema_version=1 configuration'
 expect_error grok openai.toml 'no configured KV-cache TTL for active provider grok'
+expect_error openai-codex empty.toml 'invalid TTL for provider key openai-codex'
+expect_error openai-codex newlines.toml 'invalid TTL for provider key openai-codex'
+expect_value openai-codex leading-zero.toml 009
+expect_value openai-codex maximum.toml 9223372036854775807
 
 printf 'ok: %s resolver checks; isolated skillcfg TOML and CSA-absent PATH\n' "$checks"

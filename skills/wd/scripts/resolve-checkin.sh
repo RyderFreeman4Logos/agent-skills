@@ -26,8 +26,7 @@ fi
 for key do
   if ttl=$(skillcfg get "kv_cache.provider_ttls.$key" 2>/dev/null); then
     case "$ttl" in
-      '') continue ;;
-      *[!0-9]*) printf 'invalid TTL for provider key %s: expected decimal digits\n' "$key" >&2; exit 2 ;;
+      ''|*[!0-9]*) printf 'invalid TTL for provider key %s: expected decimal digits\n' "$key" >&2; exit 2 ;;
     esac
     positive=$ttl
     while [ "${positive#0}" != "$positive" ]; do
