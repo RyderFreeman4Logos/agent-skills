@@ -126,14 +126,14 @@ Use the language of the user's input unless asked otherwise.
 
 Recommended structure:
 
+<!-- Example label for a surviving diagnosis only: ### 1. `straw_man` — <简述> -->
 ```markdown
 ## 结论
 - 总体推理评价：...
 - 最影响核心结论的问题：...
 
 ## 逐项分析
-<!-- 示例标签仅在诊断经复核成立时使用；否则省略标签。 -->
-### 1. `straw_man` — <简述>
+### 1. <推理缺陷：简述>
 **原文：** “...”
 **忠实重构：** 前提…；推论…；结论…
 **推理缺陷：** ...
