@@ -1,6 +1,6 @@
 ---
 name: logic-fallacy-auditor
-description: Analyze input text for logical fallacies, rhetorical fallacies, and reasoning defects. Reconstruct arguments charitably, map findings to a 65-concept bilingual taxonomy, quote exact evidence, distinguish invalid reasoning from merely false/unsupported claims, and report confidence plus the strongest non-fallacious interpretation.
+description: Audit reasoning defects by reconstructing arguments before optional taxonomy annotation. Preserve exact evidence, separate fact checks, and report uncertainty.
 ---
 
 # Logic Fallacy Auditor
@@ -28,8 +28,7 @@ A false conclusion is not automatically a fallacy. A fallacious argument does no
 Before doing a careful analysis, consult:
 
 - `references/methodology.md` — decision procedure and false-positive controls.
-- `references/fallacies.json` — manifest for `fallacies-part-01.json` through `fallacies-part-04.json`; run `python3 scripts/load_taxonomy.py` to reconstruct the complete machine-readable taxonomy.
-- `references/65-fallacies.md` — index linking the ordered human-readable taxonomy parts; read all parts for a complete taxonomy-wide analysis.
+- `references/fallacies.json` and `references/65-fallacies.md` — machine-readable manifest and human-readable index for the 65 concepts; run `python3 scripts/load_taxonomy.py` to reconstruct the complete taxonomy.
 - `references/sources.md` — provenance and external references.
 
 For long inputs, also use `scripts/prepare_input.py` to normalize and line-number the text.
@@ -54,8 +53,6 @@ Do not force every sentence into an argument.
 
 First state the argument faithfully: explicit premises, any premise genuinely implied by context, the inference, and the conclusion. Do not silently add evidence or a premise. Separately state the strongest non-fallacious interpretation; mark every premise it adds. If that rescue depends on a new premise, say so rather than smuggling it into the faithful reconstruction.
 
-This prevents a fallacy detector from itself committing a straw man and makes the source argument distinguishable from a charitable repair.
-
 ### 3. Test the inference, not the vocabulary
 
 A keyword is never sufficient evidence.
@@ -63,9 +60,8 @@ A keyword is never sufficient evidence.
 Examples:
 
 - An insult is **not automatically ad hominem**. It is ad hominem when the insult or personal trait is used as a reason to dismiss the person's claim or argument.
-- Mentioning fear is **not automatically appeal to fear**. It becomes fallacious when fear substitutes for relevant evidence.
+- Emotional language is **not automatically an appeal to fear**; emotions can be relevant to moral or policy decisions. It is fallacious only when it substitutes for relevant evidence.
 - Citing an expert is **not automatically appeal to authority**. Expertise can be legitimate evidence when the expert is qualified, the field is appropriate, and the claim tracks expert consensus or evidence.
-- A sequence of consequences is **not automatically a slippery slope**. It is fallacious only when crucial links are asserted without adequate support or inevitability is overstated.
 - Correlation can legitimately support causal inference when backed by design, mechanism, controls, temporality, intervention, or other causal evidence.
 
 ### 4. Match against the taxonomy
@@ -87,11 +83,6 @@ Never convert uncertainty into certainty merely because a fallacy label sounds f
 ### 6. Separate reasoning diagnosis from fact checking
 
 If the defect depends on whether a factual premise is true, write `fact_check_needed: true` and explain what fact would need verification.
-
-Examples:
-
-- “Scientists agree X” may be an anonymous-authority problem if no source is given, but whether X is actually the scientific consensus requires fact checking.
-- “A happened before B, therefore A caused B” can be diagnosed structurally as post hoc even before checking whether A and B occurred.
 
 ### 7. For every finding, include all of these
 
