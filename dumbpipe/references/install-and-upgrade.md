@@ -97,6 +97,10 @@ If the shim is unexpectedly absent after a successful install:
 mise reshim
 ```
 
+## Termux / Android exception
+
+The Linux glibc/mise prebuilt-binary fallback below does not automatically apply to Termux. Some Termux builds of dumbpipe abort in Android `ndk-context`; when that occurs, see [ssh-over-dumbpipe.md](ssh-over-dumbpipe.md) for the observed `CARGO_PROFILE_RELEASE_PANIC=unwind` source-build workaround and the SSH `ProxyCommand` option. A panic printed by a Tokio worker is not, by itself, proof that forwarding failed.
+
 ## 4. glibc mismatch fallback
 
 Mise uses an external `cargo-binstall` when available. Mise automatically falls back to `cargo install` only when cargo-binstall reports “no prebuilt artifact” using its designated exit code. A downloaded binary that later fails with a message such as `GLIBC_2.xx not found` is a different failure and needs an explicit source build.
