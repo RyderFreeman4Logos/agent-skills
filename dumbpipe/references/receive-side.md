@@ -1,5 +1,7 @@
 # Receive-side workflows
 
+**SSH exception:** When the application is OpenSSH (including `scp` and `sftp`), prefer [ssh-over-dumbpipe.md](ssh-over-dumbpipe.md): `ProxyCommand dumbpipe connect` avoids a receiver-side TCP port or Unix socket and has worked around a reported Termux `connect-tcp` problem. Use the workflows below for other TCP/Unix applications or when a local socket is explicitly required.
+
 Read this file when the user has a dumbpipe ticket and wants a local TCP port or Unix socket that forwards to the share side.
 
 ## Store the received ticket
