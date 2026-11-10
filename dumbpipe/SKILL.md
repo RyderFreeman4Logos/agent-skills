@@ -60,7 +60,7 @@ Read only the files needed for the current task:
 - Consuming a ticket through a local TCP port or Unix socket: [references/receive-side.md](references/receive-side.md)
 - SSH, SCP, SFTP, `ProxyCommand`, or Termux/Android: [references/ssh-over-dumbpipe.md](references/ssh-over-dumbpipe.md)
 - `systemctl --user enable`, boot persistence, unit templates, or lingering: [references/systemd-user-services.md](references/systemd-user-services.md)
-- Unavailable or unstable service: [references/recovery-and-diagnostics.md](references/recovery-and-diagnostics.md)
+- Unavailable or unstable service, blocked `dns.iroh.link`/n0 relays, or explicit relay selection: [references/recovery-and-diagnostics.md](references/recovery-and-diagnostics.md)
 - Encryption, exposure, ticket sharing, multi-device behavior, and revocation boundaries: [references/security-and-semantics.md](references/security-and-semantics.md)
 - Re-checking upstream facts or behavior after a dumbpipe/mise release: [references/upstream-sources.md](references/upstream-sources.md)
 

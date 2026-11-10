@@ -108,6 +108,44 @@ Some forwarding errors happen inside per-connection tasks and are logged while t
 
 Dumbpipe attempts direct NAT traversal and can fall back to an Iroh relay. Inspect DNS, outbound UDP/TCP policy, captive portals, VPN/firewall changes, and time synchronization. Do not assume that opening the application TCP port on the Internet is required; that is not how dumbpipe routes the remote connection.
 
+### Blocked n0 discovery or selected relay
+
+An active service and a valid identity-only ticket do not prove that discovery or the selected relay is reachable. Two observed failures were a blocked `dns.iroh.link` publish path and a blocked `usw1-1` relay, while `use1-1` and `euc1-1` remained reachable. A share on an unrestricted network can still be unreachable from a filtered receiver if its home relay is blocked there.
+
+Before changing configuration:
+
+1. Check local proxy settings, VPN and firewall policy, then compare probes on both share and receive devices. Do not disable network protections as a diagnostic shortcut.
+2. Inspect private diagnostics for `Failed to publish to pkarr`, `InvalidContentType`, TLS errors and connection timeouts. Dumbpipe can print its private key even without verbose logging: keep diagnostic files mode `0600`; do not publish raw logs or send them to journald unredacted.
+3. Probe discovery and candidate relays, independently of the application tunnel:
+
+   ```sh
+   curl --max-time 10 -I https://dns.iroh.link/
+   curl --max-time 10 -I https://usw1-1.relay.n0.iroh.link/
+   curl --max-time 10 -I https://use1-1.relay.n0.iroh.link/
+   curl --max-time 10 -I https://euc1-1.relay.n0.iroh.link/
+   curl --max-time 10 -I https://aps1-1.relay.n0.iroh.link/
+   ```
+
+   TLS `wrong version number` or `InvalidContentType` can indicate interception, but does not identify its cause by itself. If permitted, resolve the hostname and probe that IP over plain HTTP with the original `Host:` header; a redirect to a named vendor block page is stronger evidence. A 2026-11-09 field report identified a Charter/Spectrum CUJO block page this way. Do not generalize that diagnosis to every TLS failure. HTTP/TLS reachability is only a control probe, not proof that the relay protocol works.
+4. Determine the **share's** advertised relay, not only which relay the receive device prefers. Keep tickets private. If the remote share uses a blocked home relay, changing only the receiver is insufficient.
+
+For a verified blocked-relay path, use a relay-capable binary and preserve the existing identity:
+
+```sh
+# On the share device, with its existing IROH_SECRET already loaded.
+# Stop the previous listener before reusing that identity.
+"$HOME/.local/bin/dumbpipe-relay" listen-tcp --host 127.0.0.1:22 \
+  --relay https://use1-1.relay.n0.iroh.link
+```
+
+Use the real backend port. Check `listen-tcp --help` for `--relay` first: stock v0.40.1 does not provide it. As checked on 2026-11-10, [upstream PR #121](https://github.com/n0-computer/dumbpipe/pull/121) is still open (head `e2181df077ff077f564bc15b3eea93b74412da9f`), and its base is another topic branch, not the release. A custom v0.40.1-based binary supplied this capability in the field, but its precise source integration was not reproducibly established; do not assume checking out that PR alone reproduces the deployed artifact. Establish and review the exact source/base, record the binary digest, test host compatibility, and install the custom binary outside mise's managed directory so an updater cannot overwrite it. Track [#121](https://github.com/n0-computer/dumbpipe/pull/121) and [#105](https://github.com/n0-computer/dumbpipe/issues/105); retire the custom build after a released replacement passes the same tests.
+
+Save the **full ticket printed by this running listener**, including its relay route, in the existing private XDG share profile; update receiver ticket files atomically with mode `0600`. Never distribute the secret or the entire diagnostic log. A full ticket supplies the route without requiring pkarr discovery; a short identity-only ticket still depends on successful discovery. Stock v0.40.1 receivers have worked unchanged with such full tickets.
+
+The flag can be repeated for several reachable relays, but a saved full ticket describes the relay selected at that moment. With static receiver tickets, pin one verified relay so a restart cannot select another home relay and leave tickets stale. Keep another reachable relay as an explicit fallback, refreshing receiver tickets when changing it. If selecting multiple relays, verify how clients learn the new route after every restart rather than assuming the old ticket follows it.
+
+Back up the old unit, identity and receiver ticket before deployment. Test a temporary listener with a separate identity first, then change the production unit's executable/relay while retaining its original `IROH_SECRET`. Reload systemd and restart the affected listener, not the backend. Test a harmless request through the receiver (for SSH, the server banner/handshake, for example `ssh-keyscan -p <receiver-port> 127.0.0.1`; verify fingerprints separately). Use a genuinely separate network or an explicitly approved relay-only test so a direct LAN path cannot hide relay failure. Recheck after a listener restart and verify any health watchdog recovers. Restoring the old unit and receiver ticket, followed by `daemon-reload` and the affected unit restarts, provides rollback; it may also restore the original broken route.
+
 ### Incompatible prebuilt binary
 
 A `GLIBC_... not found` message is an installation problem, not a tunnel problem. Follow the source-build fallback in [install-and-upgrade.md](install-and-upgrade.md).
